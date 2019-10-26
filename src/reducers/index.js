@@ -78,39 +78,13 @@ const datatableReducer = (state = initState, action) => {
       })
 
     case SELECT_ROW:
-      return Object.assign({}, state, { selectedData: action.payload.no })
-    // switch (action.payload.mode) {
-    //   case 'ADD':
-    //     let addModeInput = Object.assign({}, state.insertInput)
-    //     addModeInput.map(value => {
-    //       value.value = ''
-    //       value.isFormatCorrect = true
-    //       return undefined
-    //     })
-    //     return Object.assign({}, state, {
-    //       insertInput: addModeInput,
-    //       inputMode: action.payload.mode,
-    //       updatingDataNo: -1
-    //     })
-    //   case 'UPDATE':
-    //     let updateModeInput = Object.assign({}, state.insertInput)
-    //     const dataKeys = ['name', 'phone', 'email']
-    //     Object.keys(updateModeInput).map((key, index) => {
-    //       // 取得欲更新 data 之 index
-    //       const updateIndex = state.data.map(data => data.no).indexOf(action.payload.updateNo)
-    //       // 取得欲更新 data 之 value
-    //       updateModeInput[key].value = state.data[updateIndex][dataKeys[index]]
-    //       updateModeInput[key].isFormatCorrect = true
-    //       return undefined
-    //     })
-    //     return Object.assign({}, state, {
-    //       insertInput: updateModeInput,
-    //       inputMode: action.payload.mode,
-    //       updatingDataNo: action.payload.updateNo
-    //     })
-    //   default:
-    //     return state
-    // }
+      let selectedInput = Object.assign({}, state.updateInput)
+      // 設定被選中 row 的值到 input value state 之中
+      Object.keys(selectedInput).map(key => selectedInput[key].value = action.payload[key])
+      return Object.assign({}, state, {
+        selectedData: action.payload.no,
+        updateInput: selectedInput
+      })
 
     case SET_INPUT_MESSAGE:
       let newInputState = Object.assign({}, state[action.payload.inputMode])
@@ -118,7 +92,10 @@ const datatableReducer = (state = initState, action) => {
       newInputState[action.payload.textbox].message
         = action.payload.message || newInputState[action.payload.textbox].message
       newInputState[action.payload.textbox].isFormatCorrect = action.payload.bool
-      return Object.assign({}, state, { insertInput: newInputState })
+      if (action.payload.inputMode === 'updateInput')
+        return Object.assign({}, state, { updateInput: newInputState })
+      else if (action.payload.inputMode === 'insertInput')
+        return Object.assign({}, state, { insertInput: newInputState })
 
     default:
       return state

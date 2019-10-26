@@ -39,11 +39,9 @@ export function setInputMessage(inputMode, textbox, bool, message) {
   }
 }
 
-export function selectRow(no) {
+export function selectRow(rowData) {
   return {
     type: SELECT_ROW,
-    payload: {
-      no
-    }
+    payload: rowData
   }
 }

@@ -40,7 +40,7 @@ class DataRow extends Component {
           {this.props.isUpdating
             ? <img onClick={() => this.props.selectRow(-1)}
               className="row__check-icon" alt="check-icon" />
-            : <img onClick={() => this.props.selectRow(this.data.no)}
+            : <img onClick={() => this.props.selectRow(this.props.rowValue)}
               className="row__edit-icon" alt="edit-icon" />
           }
         </div>
