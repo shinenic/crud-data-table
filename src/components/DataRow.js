@@ -68,11 +68,16 @@ class DataRow extends Component {
           }
         </div>
         <div>
-          <img
-            className="row__delete-icon"
-            alt="delete-icon"
-            onClick={() => !this.props.editable && this.props.deleteData(this.props.rowValue.no)}
-          />
+          {this.props.editable
+            ? <img
+              className="row__recover-icon"
+              alt="recover-icon"
+              onClick={() => this.props.selectRow({ no: -1 })} />
+            : <img
+              className="row__delete-icon"
+              alt="delete-icon"
+              onClick={() => !this.props.editable && this.props.deleteData(this.props.rowValue.no)} />
+          }
         </div>
       </div>
     )

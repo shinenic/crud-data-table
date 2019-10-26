@@ -12,8 +12,8 @@ class DataTable extends Component {
           <div>Name</div>
           <div>Phone</div>
           <div>Email</div>
-          <div>Edit</div>
-          <div>Delete</div>
+          <div></div>
+          <div></div>
         </div>
         <div className="block" />
         {this.props.data.map((value, index) => {

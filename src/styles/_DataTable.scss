@@ -47,7 +47,7 @@ $editableTextColor: rgb(100, 100, 100);
     filter: invert(0.5);
   }
 }
-%row-icon--update {
+%row-icon--editable {
   filter: invert(0.6);
 }
 %grid-center {
@@ -66,27 +66,26 @@ $editableTextColor: rgb(100, 100, 100);
   grid-template-areas: "no name phone email edit delete";
   transition: 0.3s;
   animation: fadeIn 0.5s both 1;
-  &:nth-child(1) {
+  & > div:nth-child(1) {
     grid-area: no;
     div {
       position: relative;
-      top:-5px;
-      border:1px solid black;
+      top:-1.5px;
     }
   }
-  &:nth-child(2) {
+  & > div:nth-child(2) {
     grid-area: name;
   }
-  &:nth-child(3) {
+  & > div:nth-child(3) {
     grid-area: phone;
   }
-  &:nth-child(4) {
+  & > div:nth-child(4) {
     grid-area: email;
   }
-  &:nth-child(5) {
-    grid-area: editno;
+  & > div:nth-child(5) {
+    grid-area: edit;
   }
-  &:nth-child(6) {
+  & > div:nth-child(6) {
     grid-area: delete;
   }
   &__edit-icon {
@@ -101,21 +100,18 @@ $editableTextColor: rgb(100, 100, 100);
     @extend %row-icon;
     content: url("../image/check.svg");
   }
+  &__recover-icon {
+    @extend %row-icon;
+    content: url("../image/recover.svg");
+  }
   &--updating {
-    // color: $editableTextColor;
     border-radius: 5px;
     background: $editableBgColor;
     & .form-input__textbox {
       color: black;
     }
-    // .row__edit-icon {
-    //   @extend %row-icon--update;
-    // }
-    .row__delete-icon {
-      @extend %row-icon--update;
-    }
-    // .row__check-icon {
-    //   @extend %row-icon--update;
+    // .row__delete-icon {
+    //   @extend %row-icon--editable;
     // }
   }
 }

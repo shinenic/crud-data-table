@@ -8,7 +8,10 @@ class FormInput extends Component {
     this.props.setInputState(this.props.check(e.target.value), this.props.defaultMessage)
   }
   handleKeyDown = e => {
-    e.key === 'Enter' && this.props.actionOnKeyDown()
+    if (e.key === 'Enter') {
+      this.props.actionOnKeyDown()
+      e.target.blur()
+    }
   }
   render() {
     return (

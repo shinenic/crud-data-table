@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
 import { HANDLE_INPUT_CHANGE, ADD_DATA, UPDATE_DATA, SET_INPUT_MESSAGE, DELETE_DATA, SELECT_ROW } from '../actions/types'
 
-let lastestNo = 1
 const initState = {
   insertInput: {
     name: {
@@ -43,6 +42,7 @@ const initState = {
       isFormatCorrect: true
     }
   },
+  lastestNo:0,
   selectedData: -1,
   data: [
     {
@@ -64,15 +64,17 @@ const datatableReducer = (state = initState, action) => {
         return Object.assign({}, state, { updateInput: newInput })
       else if (action.payload.inputMode === 'insertInput')
         return Object.assign({}, state, { insertInput: newInput })
+      else return Object.assign({}, state)
 
     case ADD_DATA:
       const newData = Object.keys(state.insertInput).reduce((acc, key) => {
         acc[key] = state.insertInput[key].value
         return acc
       }, {})
-      newData.no = lastestNo++
+      newData.no = state.lastestNo+1
       return Object.assign({}, state, {
-        data: [...state.data, newData]
+        data: [...state.data, newData],
+        lastestNo:state.lastestNo+1
       })
 
     case UPDATE_DATA:
@@ -120,6 +122,8 @@ const datatableReducer = (state = initState, action) => {
         return Object.assign({}, state, { updateInput: newInputState })
       else if (action.payload.inputMode === 'insertInput')
         return Object.assign({}, state, { insertInput: newInputState })
+      else
+        return Object.assign({}, state)
 
     default:
       return state
