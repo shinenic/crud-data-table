@@ -1,0 +1,40 @@
+$blockColor: rgb(63, 81, 181);
+
+.data-table {
+  width: 100%;
+  height: 100px;
+  margin: 50px 0;
+  // border: 1px solid black;
+  .block {
+    height: 3px;
+    width: 100%;
+    padding: 0 20px;
+    margin: 15px 0;
+    border-radius: 5px;
+    background: $blockColor;
+  }
+}
+.row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 70px 0.3fr 0.3fr 0.4fr 70px 70px;
+  grid-template-areas: "no name phone email edit delete";
+  &:nth-child(1) {
+    grid-area: no;
+  }
+  &:nth-child(2) {
+    grid-area: name;
+  }
+  &:nth-child(3) {
+    grid-area: phone;
+  }
+  &:nth-child(4) {
+    grid-area: email;
+  }
+  &:nth-child(5) {
+    grid-area: editno;
+  }
+  &:nth-child(6) {
+    grid-area: delete;
+  }
+}

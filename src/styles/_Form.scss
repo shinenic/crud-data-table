@@ -1,0 +1,36 @@
+$buttonColor: rgb(63, 81, 181);
+$textColor: rgb(73, 80, 87);
+$buttonHover: rgb(80, 97, 194);
+$buttonActive: rgb(100,117,214);
+
+.form {
+  width: 100%;
+  grid-area: form;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & div {
+    flex: 1;
+  }
+  & > div > button {
+    background: transparent;
+    padding: 7px 18px;
+    border: none;
+    background: $buttonColor;
+    border-radius: 5px;
+    font-size: 17px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+    &:hover {
+      background: $buttonHover;
+    }
+    &:active {
+      background: $buttonActive;
+      outline: none;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}
