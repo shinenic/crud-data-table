@@ -30,9 +30,10 @@ body,
 }
 
 .app {
+  margin: 0px auto;
+  padding: 0 10px;
   color: $text-color;
-  width: 100%;
-  padding: 0 100px;
+  max-width:900px;
 }
 .header {
   width: 100%;
@@ -49,5 +50,8 @@ body,
   }
   .search {
     font-size: 26px;
+  }
+  @media (max-width: 480px) {
+    height: 20px;
   }
 }

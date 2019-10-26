@@ -1,7 +1,7 @@
 $buttonColor: rgb(63, 81, 181);
 $textColor: rgb(73, 80, 87);
 $buttonHover: rgb(80, 97, 194);
-$buttonActive: rgb(100,117,214);
+$buttonActive: rgb(100, 117, 214);
 
 .form {
   width: 100%;
@@ -9,8 +9,15 @@ $buttonActive: rgb(100,117,214);
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
   & div {
     flex: 1;
+    @media (max-width: 480px) {
+      flex: unset;
+      width: 100%;
+    }
   }
   & > div > button {
     background: transparent;
