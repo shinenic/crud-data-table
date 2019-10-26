@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { HANDLE_INPUT_CHANGE, ADD_DATA, SET_INPUT_MESSAGE, DELETE_DATA, SELECT_DATA } from '../actions/types'
+import { HANDLE_INPUT_CHANGE, ADD_DATA, SET_INPUT_MESSAGE, DELETE_DATA, SELECT_ROW } from '../actions/types'
 
 let lastestNo = 1
 const initState = {
@@ -43,7 +43,6 @@ const initState = {
       isFormatCorrect: true
     }
   },
-  // inputMode: 'ADD', // UPDATE
   selectedData: -1,
   data: []
 }
@@ -55,10 +54,10 @@ const datatableReducer = (state = initState, action) => {
     case HANDLE_INPUT_CHANGE:
       let newInput = Object.assign({}, state[action.payload.inputMode])
       newInput[action.payload.textbox].value = action.payload.value
-      let newInputObj = {}
-      newInputObj[action.payload.inputMode] = newInput
-      console.log(newInputObj)
-      return Object.assign({}, state, { updateInput: newInput })
+      if (action.payload.inputMode === 'updateInput')
+        return Object.assign({}, state, { updateInput: newInput })
+      else if (action.payload.inputMode === 'insertInput')
+        return Object.assign({}, state, { insertInput: newInput })
 
     case ADD_DATA:
       let data = Object.keys(state.insertInput).reduce((acc, key) => {
@@ -78,8 +77,8 @@ const datatableReducer = (state = initState, action) => {
         data: [...state.data]
       })
 
-    case SELECT_DATA:
-      return state
+    case SELECT_ROW:
+      return Object.assign({}, state, { selectedData: action.payload.no })
     // switch (action.payload.mode) {
     //   case 'ADD':
     //     let addModeInput = Object.assign({}, state.insertInput)

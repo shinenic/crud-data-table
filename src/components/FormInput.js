@@ -5,7 +5,7 @@ import * as actions from '../actions/index'
 class FormInput extends Component {
   handleChange = e => {
     this.props.handleChange(e.target.value)
-    // this.props.setInputState(this.props.check(e.target.value), this.props.defaultMessage)
+    this.props.setInputState(this.props.check(e.target.value), this.props.defaultMessage)
   }
   handleKeyDown = e => {
     e.key === 'Enter' && this.props.addDataOnKeyDown()
@@ -19,13 +19,13 @@ class FormInput extends Component {
           value={this.props.value}
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
-          // disabled={!!this.isUpdating}
-          ></input>
-        {/* <div
+        // disabled={!!this.isUpdating}
+        ></input>
+        <div
           className={this.props.value === ''
             ? 'form-input__placehoder'
             : 'form-input__placehoder form-input__placehoder--fixed'}>{this.props.name}</div>
-        <div className={this.props.isFormatCorrect ? "form-input__message" : "form-input__message form-input__message--show"}>{this.props.message}</div> */}
+        <div className={this.props.isFormatCorrect ? "form-input__message" : "form-input__message form-input__message--show"}>{this.props.message}</div>
       </div>
     )
   }

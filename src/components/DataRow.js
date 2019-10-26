@@ -19,16 +19,15 @@ class DataRow extends Component {
   render() {
     return (
       <div className={this.props.isUpdating ? 'row row--updating' : 'row'}>
-        <div>{this.props.rowValue.no}</div>
+        <div>{this.data.no}</div>
         {Object.keys(this.props.updateInput).map((key, index) => {
           return (<FormInput
             key={index}
-            value={this.props.updateInput[key].value}
-            // value={this.rowData[index + 1]}
+            value={this.props.isUpdating ? this.props.updateInput[key].value : this.rowData[index + 1]}
             handleChange={str => this.props.handleInputChange('updateInput', key, str)}
             setInputState={(bool, message) => this.props.setInputMessage('updateInput', key, bool, message)}
-            check={this.formatCheck[index]} 
-            message={this.props.updateInput[key].message} 
+            check={this.formatCheck[index]}
+            message={this.props.updateInput[key].message}
             isFormatCorrect={this.props.updateInput[key].isFormatCorrect}
             defaultMessage={defaultMessage[index]}
           // updateDataOnKeyDown={this.update} // todo
@@ -38,9 +37,12 @@ class DataRow extends Component {
         <div>{this.props.rowValue.phone}</div>
         <div>{this.props.rowValue.email}</div> */}
         <div>
-          <img onClick={() => {
-            !this.props.isUpdating && this.props.switchInputMode('UPDATE', this.props.rowValue.no)
-          }} className="row__edit-icon" alt="edit-icon" />
+          {this.props.isUpdating
+            ? <img onClick={() => this.props.selectRow(-1)}
+              className="row__check-icon" alt="check-icon" />
+            : <img onClick={() => this.props.selectRow(this.data.no)}
+              className="row__edit-icon" alt="edit-icon" />
+          }
         </div>
         <div>
           <img

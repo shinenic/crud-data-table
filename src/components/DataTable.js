@@ -21,7 +21,7 @@ class DataTable extends Component {
             <DataRow
               key={index}
               rowValue={value}
-              isUpdating={value.no === this.props.updatingDataNo}
+              isUpdating={value.no === this.props.selectedData}
             />
           )
         })}
@@ -36,7 +36,7 @@ class DataTable extends Component {
 function mapStateToProps(state) {
   return {
     data: state.root.data,
-    updatingDataNo: state.root.updatingDataNo
+    selectedData: state.root.selectedData
   }
 }
 

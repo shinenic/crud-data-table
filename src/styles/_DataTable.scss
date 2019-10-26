@@ -40,11 +40,11 @@ $updatingTextColor: rgb(100, 100, 100);
   }
 }
 %row-icon--update {
-  cursor: not-allowed;
+  // cursor: not-allowed;
   filter: invert(0.5);
 }
 %grid-center {
-  display:grid;
+  display: grid;
   align-items: center;
   justify-content: center;
 }
@@ -95,6 +95,9 @@ $updatingTextColor: rgb(100, 100, 100);
       @extend %row-icon--update;
     }
     .row__delete-icon {
+      @extend %row-icon--update;
+    }
+    .row__check-icon {
       @extend %row-icon--update;
     }
   }
