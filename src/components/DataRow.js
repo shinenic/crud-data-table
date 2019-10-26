@@ -2,19 +2,41 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions/index'
 import FormInput from './FormInput'
+import { checkValueUnique, checkFormat, defaultMessage } from './Form'
 
 class DataRow extends Component {
+  data = this.props.rowValue
+  rowData = [this.data.no, this.data.name, this.data.phone, this.data.email]
+  formatCheck = [
+    str => {
+      const dataExceptSelf = [...this.props.data]
+      dataExceptSelf.splice(dataExceptSelf.map(value => value.no).indexOf(this.data.no), 1)
+      return checkValueUnique(str, dataExceptSelf)
+    },
+    str => checkFormat(str, 'PHONE'),
+    str => checkFormat(str, 'EMAIL')
+  ]
   render() {
     return (
       <div className={this.props.isUpdating ? 'row row--updating' : 'row'}>
         <div>{this.props.rowValue.no}</div>
-        <div>{this.props.rowValue.name}</div>
-        <div>
-          <FormInput
-            value={this.props.rowValue.phone} />
-        </div>
-        {/* <div>{this.props.rowValue.phone}</div> */}
-        <div>{this.props.rowValue.email}</div>
+        {Object.keys(this.props.updateInput).map((key, index) => {
+          return (<FormInput
+            key={index}
+            value={this.props.updateInput[key].value}
+            // value={this.rowData[index + 1]}
+            handleChange={str => this.props.handleInputChange('updateInput', key, str)}
+            setInputState={(bool, message) => this.props.setInputMessage('updateInput', key, bool, message)}
+            check={this.formatCheck[index]} 
+            message={this.props.updateInput[key].message} 
+            isFormatCorrect={this.props.updateInput[key].isFormatCorrect}
+            defaultMessage={defaultMessage[index]}
+          // updateDataOnKeyDown={this.update} // todo
+          />)
+        })}
+        {/* <div>{this.props.rowValue.name}</div>
+        <div>{this.props.rowValue.phone}</div>
+        <div>{this.props.rowValue.email}</div> */}
         <div>
           <img onClick={() => {
             !this.props.isUpdating && this.props.switchInputMode('UPDATE', this.props.rowValue.no)
@@ -33,7 +55,8 @@ class DataRow extends Component {
 }
 function mapStateToProps(state) {
   return {
-    input: state.root.updateInput
+    updateInput: state.root.updateInput,
+    data: state.root.data
   }
 }
 

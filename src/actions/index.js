@@ -6,11 +6,11 @@ import {
   SELECT_DATA
 } from './types'
 
-export function handleInputChange(textbox, value) {
+export function handleInputChange(inputMode, textbox, value) {
   return {
     type: HANDLE_INPUT_CHANGE,
     payload: {
-      textbox, value
+      inputMode, textbox, value
     }
   }
 }

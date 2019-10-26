@@ -49,13 +49,16 @@ const initState = {
 }
 
 const datatableReducer = (state = initState, action) => {
-  console.log(action)
+  // console.log(action)
   switch (action.type) {
 
     case HANDLE_INPUT_CHANGE:
-      let newInput = Object.assign({}, state.insertInput)
+      let newInput = Object.assign({}, state[action.payload.inputMode])
       newInput[action.payload.textbox].value = action.payload.value
-      return Object.assign({}, state, { insertInput: newInput })
+      let newInputObj = {}
+      newInputObj[action.payload.inputMode] = newInput
+      console.log(newInputObj)
+      return Object.assign({}, state, { updateInput: newInput })
 
     case ADD_DATA:
       let data = Object.keys(state.insertInput).reduce((acc, key) => {
@@ -76,38 +79,39 @@ const datatableReducer = (state = initState, action) => {
       })
 
     case SELECT_DATA:
-      switch (action.payload.mode) {
-        case 'ADD':
-          let addModeInput = Object.assign({}, state.insertInput)
-          addModeInput.map(value => {
-            value.value = ''
-            value.isFormatCorrect = true
-            return undefined
-          })
-          return Object.assign({}, state, {
-            insertInput: addModeInput,
-            inputMode: action.payload.mode,
-            updatingDataNo: -1
-          })
-        case 'UPDATE':
-          let updateModeInput = Object.assign({}, state.insertInput)
-          const dataKeys = ['name', 'phone', 'email']
-          Object.keys(updateModeInput).map((key, index) => {
-            // 取得欲更新 data 之 index
-            const updateIndex = state.data.map(data => data.no).indexOf(action.payload.updateNo)
-            // 取得欲更新 data 之 value
-            updateModeInput[key].value = state.data[updateIndex][dataKeys[index]]
-            updateModeInput[key].isFormatCorrect = true
-            return undefined
-          })
-          return Object.assign({}, state, {
-            insertInput: updateModeInput,
-            inputMode: action.payload.mode,
-            updatingDataNo: action.payload.updateNo
-          })
-        default:
-          return state
-      }
+      return state
+    // switch (action.payload.mode) {
+    //   case 'ADD':
+    //     let addModeInput = Object.assign({}, state.insertInput)
+    //     addModeInput.map(value => {
+    //       value.value = ''
+    //       value.isFormatCorrect = true
+    //       return undefined
+    //     })
+    //     return Object.assign({}, state, {
+    //       insertInput: addModeInput,
+    //       inputMode: action.payload.mode,
+    //       updatingDataNo: -1
+    //     })
+    //   case 'UPDATE':
+    //     let updateModeInput = Object.assign({}, state.insertInput)
+    //     const dataKeys = ['name', 'phone', 'email']
+    //     Object.keys(updateModeInput).map((key, index) => {
+    //       // 取得欲更新 data 之 index
+    //       const updateIndex = state.data.map(data => data.no).indexOf(action.payload.updateNo)
+    //       // 取得欲更新 data 之 value
+    //       updateModeInput[key].value = state.data[updateIndex][dataKeys[index]]
+    //       updateModeInput[key].isFormatCorrect = true
+    //       return undefined
+    //     })
+    //     return Object.assign({}, state, {
+    //       insertInput: updateModeInput,
+    //       inputMode: action.payload.mode,
+    //       updatingDataNo: action.payload.updateNo
+    //     })
+    //   default:
+    //     return state
+    // }
 
     case SET_INPUT_MESSAGE:
       let newInputState = Object.assign({}, state[action.payload.inputMode])

@@ -32,6 +32,7 @@ export const checkFormat = (str, type) => {
   }
   return reg.test(str)
 }
+export const defaultMessage = ['name has been used', 'please check the format', 'please check the format']
 
 class Form extends Component {
   formatCheck = [
@@ -39,7 +40,6 @@ class Form extends Component {
     str => checkFormat(str, 'PHONE'),
     str => checkFormat(str, 'EMAIL')
   ]
-  defaultMessage = ['name has been used', 'please check the format', 'please check the format']
   addData = () => {
     const isFormatPass = Object.keys(this.props.insertInput).reduce((acc, key) => {
       // 重新檢查 format
@@ -56,7 +56,7 @@ class Form extends Component {
     }, true)
     if (isFormatPass) {
       this.props.addData() // add data
-      Object.keys(this.props.insertInput).map(key => this.props.handleInputChange(key, '')) // clean input
+      Object.keys(this.props.insertInput).map(key => this.props.handleInputChange('insertInput', key, '')) // clean input
     }
   }
   render() {
@@ -67,12 +67,12 @@ class Form extends Component {
             key={index}
             name={this.props.insertInput[key].name}
             value={this.props.insertInput[key].value}
-            handleChange={str => this.props.handleInputChange(key, str)}
+            handleChange={str => this.props.handleInputChange('insertInput', key, str)}
             setInputState={(bool, message) => this.props.setInputMessage('insertInput', key, bool, message)}
             check={this.formatCheck[index]}
             message={this.props.insertInput[key].message}
             isFormatCorrect={this.props.insertInput[key].isFormatCorrect}
-            defaultMessage={this.defaultMessage[index]}
+            defaultMessage={defaultMessage[index]}
             addDataOnKeyDown={this.addData} />)
         })}
         <div>
