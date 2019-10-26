@@ -15,17 +15,19 @@ class FormInput extends Component {
       <div className="form-input">
         <input
           type="text"
-          className="form-input__textbox"
+          className={!!this.props.isEditable ? "form-input__textbox" : "form-input__textbox form-input__textbox--disable"}
           value={this.props.value}
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
-        // disabled={!!this.isUpdating}
+          disabled={!this.props.isEditable}
         ></input>
+        {this.props.isEditable ? 'editable' : 'edit disable'}
         <div
           className={this.props.value === ''
             ? 'form-input__placehoder'
             : 'form-input__placehoder form-input__placehoder--fixed'}>{this.props.name}</div>
-        <div className={this.props.isFormatCorrect ? "form-input__message" : "form-input__message form-input__message--show"}>{this.props.message}</div>
+        {this.props.isEditable &&
+          <div className={this.props.isFormatCorrect ? "form-input__message" : "form-input__message form-input__message--show"}>{this.props.message}</div>}
       </div>
     )
   }

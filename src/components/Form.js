@@ -72,6 +72,7 @@ class Form extends Component {
             check={this.formatCheck[index]}
             message={this.props.insertInput[key].message}
             isFormatCorrect={this.props.insertInput[key].isFormatCorrect}
+            isEditable={true}
             defaultMessage={defaultMessage[index]}
             addDataOnKeyDown={this.addData} />)
         })}

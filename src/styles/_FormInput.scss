@@ -10,7 +10,7 @@ $textColor: rgb(73, 80, 87);
   &__textbox {
     padding: 20px 3px 3px 0;
     // width: calc(100% - 20px);
-    width:90%;
+    width: 90%;
     position: absolute;
     top: 0;
     left: 0;
@@ -21,6 +21,9 @@ $textColor: rgb(73, 80, 87);
     font-size: 18px;
     transition: border 0.3s;
     z-index: 2;
+    &--disable {
+      border: none;
+    }
     &:focus {
       border-bottom: 1.5px solid $textboxFocusColor;
       outline: none;

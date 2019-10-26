@@ -1,6 +1,7 @@
 import {
   HANDLE_INPUT_CHANGE,
   ADD_DATA,
+  UPDATE_DATA,
   SET_INPUT_MESSAGE,
   DELETE_DATA,
   SELECT_ROW
@@ -18,6 +19,12 @@ export function handleInputChange(inputMode, textbox, value) {
 export function addData() {
   return {
     type: ADD_DATA
+  }
+}
+
+export function updateData() {
+  return {
+    type: UPDATE_DATA
   }
 }
 
