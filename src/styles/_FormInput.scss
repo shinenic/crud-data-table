@@ -8,8 +8,9 @@ $textColor: rgb(73, 80, 87);
   position: relative;
   height: 65px;
   &__textbox {
-    padding: 16px 3px 3px 0;
-    width: calc(100% - 20px);
+    padding: 20px 3px 3px 0;
+    // width: calc(100% - 20px);
+    width:90%;
     position: absolute;
     top: 0;
     left: 0;
@@ -17,7 +18,7 @@ $textColor: rgb(73, 80, 87);
     border-bottom: 1.5px solid $textboxColor;
     background: transparent;
     color: $textColor;
-    font-size: 20px;
+    font-size: 18px;
     transition: border 0.3s;
     z-index: 2;
     &:focus {
@@ -35,9 +36,9 @@ $textColor: rgb(73, 80, 87);
     color: $textboxColor;
     font-size: 14px;
     position: absolute;
-    top: 16px;
+    top: 20px;
     left: 0;
-    font-size: 20px;
+    font-size: 18px;
     transition: 0.3s;
     &--fixed {
       top: 0;

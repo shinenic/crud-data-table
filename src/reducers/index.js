@@ -23,6 +23,26 @@ const initState = {
       isFormatCorrect: true
     }
   },
+  updateInput: {
+    name: {
+      name: 'Name',
+      value: '',
+      message: 'name has been used',
+      isFormatCorrect: true
+    },
+    phone: {
+      name: 'Phone',
+      value: '',
+      message: 'please check the format',
+      isFormatCorrect: true
+    },
+    email: {
+      name: 'Email',
+      value: '',
+      message: 'please check the format',
+      isFormatCorrect: true
+    }
+  },
   inputMode: 'ADD', // UPDATE
   updatingDataNo: -1,
   data: []
