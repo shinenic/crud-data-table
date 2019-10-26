@@ -18,7 +18,8 @@ class FormInput extends Component {
           className="form-input__textbox"
           value={this.props.value}
           onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}></input>
+          onKeyDown={this.handleKeyDown}
+          disabled={!!this.isUpdating}></input>
         <div
           className={this.props.value === ''
             ? 'form-input__placehoder'

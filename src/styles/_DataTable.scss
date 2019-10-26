@@ -43,10 +43,17 @@ $updatingTextColor: rgb(100, 100, 100);
   cursor: not-allowed;
   filter: invert(0.5);
 }
+%grid-center {
+  display:grid;
+  align-items: center;
+  justify-content: center;
+}
 .row {
   width: 100%;
   padding: 10px;
   display: grid;
+  align-items: center;
+  justify-content: center;
   grid-template-columns: 70px 0.3fr 0.3fr 0.4fr 70px 70px;
   grid-template-areas: "no name phone email edit delete";
   transition: 0.5s;

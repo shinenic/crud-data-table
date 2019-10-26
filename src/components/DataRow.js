@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions/index'
+import FormInput from './FormInput'
 
 class DataRow extends Component {
   render() {
@@ -8,7 +9,11 @@ class DataRow extends Component {
       <div className={this.props.isUpdating ? 'row row--updating' : 'row'}>
         <div>{this.props.rowValue.no}</div>
         <div>{this.props.rowValue.name}</div>
-        <div>{this.props.rowValue.phone}</div>
+        <div>
+          <FormInput
+            value={this.props.rowValue.phone} />
+        </div>
+        {/* <div>{this.props.rowValue.phone}</div> */}
         <div>{this.props.rowValue.email}</div>
         <div>
           <img onClick={() => {
@@ -28,7 +33,7 @@ class DataRow extends Component {
 }
 function mapStateToProps(state) {
   return {
-    input: state.root.input
+    input: state.root.updateInput
   }
 }
 

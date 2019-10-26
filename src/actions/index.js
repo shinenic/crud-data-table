@@ -3,7 +3,7 @@ import {
   ADD_DATA,
   SET_INPUT_MESSAGE,
   DELETE_DATA,
-  SWITCH_INPUT_MODE
+  SELECT_DATA
 } from './types'
 
 export function handleInputChange(textbox, value) {
@@ -30,18 +30,18 @@ export function deleteData(no) {
   }
 }
 
-export function setInputMessage(textbox, bool, message) {
+export function setInputMessage(inputMode, textbox, bool, message) {
   return {
     type: SET_INPUT_MESSAGE,
     payload: {
-      textbox, bool, message
+      inputMode, textbox, bool, message
     }
   }
 }
 
 export function switchInputMode(mode, updateNo) {
   return {
-    type: SWITCH_INPUT_MODE,
+    type: SELECT_DATA,
     payload: {
       mode, updateNo
     }

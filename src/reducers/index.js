@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import { HANDLE_INPUT_CHANGE, ADD_DATA, SET_INPUT_MESSAGE, DELETE_DATA, SWITCH_INPUT_MODE } from '../actions/types'
+import { HANDLE_INPUT_CHANGE, ADD_DATA, SET_INPUT_MESSAGE, DELETE_DATA, SELECT_DATA } from '../actions/types'
 
 let lastestNo = 1
 const initState = {
-  input: {
+  insertInput: {
     name: {
       name: 'Name',
       value: 'Jack',
@@ -43,8 +43,8 @@ const initState = {
       isFormatCorrect: true
     }
   },
-  inputMode: 'ADD', // UPDATE
-  updatingDataNo: -1,
+  // inputMode: 'ADD', // UPDATE
+  selectedData: -1,
   data: []
 }
 
@@ -53,13 +53,13 @@ const datatableReducer = (state = initState, action) => {
   switch (action.type) {
 
     case HANDLE_INPUT_CHANGE:
-      let newInput = Object.assign({}, state.input)
+      let newInput = Object.assign({}, state.insertInput)
       newInput[action.payload.textbox].value = action.payload.value
-      return Object.assign({}, state, { input: newInput })
+      return Object.assign({}, state, { insertInput: newInput })
 
     case ADD_DATA:
-      let data = Object.keys(state.input).reduce((acc, key) => {
-        acc[key] = state.input[key].value
+      let data = Object.keys(state.insertInput).reduce((acc, key) => {
+        acc[key] = state.insertInput[key].value
         return acc
       }, {})
       data.no = lastestNo++
@@ -75,22 +75,22 @@ const datatableReducer = (state = initState, action) => {
         data: [...state.data]
       })
 
-    case SWITCH_INPUT_MODE:
+    case SELECT_DATA:
       switch (action.payload.mode) {
         case 'ADD':
-          let addModeInput = Object.assign({}, state.input)
+          let addModeInput = Object.assign({}, state.insertInput)
           addModeInput.map(value => {
             value.value = ''
             value.isFormatCorrect = true
             return undefined
           })
           return Object.assign({}, state, {
-            input: addModeInput,
+            insertInput: addModeInput,
             inputMode: action.payload.mode,
             updatingDataNo: -1
           })
         case 'UPDATE':
-          let updateModeInput = Object.assign({}, state.input)
+          let updateModeInput = Object.assign({}, state.insertInput)
           const dataKeys = ['name', 'phone', 'email']
           Object.keys(updateModeInput).map((key, index) => {
             // 取得欲更新 data 之 index
@@ -101,7 +101,7 @@ const datatableReducer = (state = initState, action) => {
             return undefined
           })
           return Object.assign({}, state, {
-            input: updateModeInput,
+            insertInput: updateModeInput,
             inputMode: action.payload.mode,
             updatingDataNo: action.payload.updateNo
           })
@@ -110,12 +110,12 @@ const datatableReducer = (state = initState, action) => {
       }
 
     case SET_INPUT_MESSAGE:
-      let newInputState = Object.assign({}, state.input)
+      let newInputState = Object.assign({}, state[action.payload.inputMode])
       // 若沒有 payload.message 參數傳入
       newInputState[action.payload.textbox].message
         = action.payload.message || newInputState[action.payload.textbox].message
       newInputState[action.payload.textbox].isFormatCorrect = action.payload.bool
-      return Object.assign({}, state, { input: newInputState })
+      return Object.assign({}, state, { insertInput: newInputState })
 
     default:
       return state
