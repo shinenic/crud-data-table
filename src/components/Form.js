@@ -84,11 +84,6 @@ class Form extends Component {
 }
 function mapStateToProps(state) {
   return {
-    // inputName: state.root.inputName,
-    // inputEmail: state.root.inputEmail,
-    // inputPhone: state.root.inputPhone,
-    // inputText: state.root.inputText,
-    // isFormatCorrect: state.root.isFormatCorrect,
     input: state.root.input,
     data: state.root.data
   }

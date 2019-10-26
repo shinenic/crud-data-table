@@ -18,17 +18,10 @@ class DataTable extends Component {
         <div className="block" />
         {this.props.data.map((value, index) => {
           return (
-            // <div className="row" key={index}>
-            //   <div>{value.no}</div>
-            //   <div>{value.name}</div>
-            //   <div>{value.phone}</div>
-            //   <div>{value.email}</div>
-            //   <div>O</div>
-            //   <div>X</div>
-            // </div>
             <DataRow
               key={index}
               rowValue={value}
+              isUpdating={value.no === this.props.updatingDataNo}
             />
           )
         })}
@@ -42,7 +35,8 @@ class DataTable extends Component {
 }
 function mapStateToProps(state) {
   return {
-    data: state.root.data
+    data: state.root.data,
+    updatingDataNo: state.root.updatingDataNo
   }
 }
 

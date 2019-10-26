@@ -5,17 +5,21 @@ import * as actions from '../actions/index'
 class DataRow extends Component {
   render() {
     return (
-      <div className="row">
+      <div className={this.props.isUpdating ? 'row row--updating' : 'row'}>
         <div>{this.props.rowValue.no}</div>
         <div>{this.props.rowValue.name}</div>
         <div>{this.props.rowValue.phone}</div>
         <div>{this.props.rowValue.email}</div>
-        <div><img className="row__edit-icon" alt="edit-icon" /></div>
+        <div>
+          <img onClick={() => {
+            !this.props.isUpdating && this.props.switchInputMode('UPDATE', this.props.rowValue.no)
+          }} className="row__edit-icon" alt="edit-icon" />
+        </div>
         <div>
           <img
             className="row__delete-icon"
             alt="delete-icon"
-            onClick={() => this.props.deleteData(this.props.rowValue.no)}
+            onClick={() => !this.props.isUpdating && this.props.deleteData(this.props.rowValue.no)}
           />
         </div>
       </div>
@@ -24,7 +28,7 @@ class DataRow extends Component {
 }
 function mapStateToProps(state) {
   return {
-    // data: state.root.data
+    input: state.root.input
   }
 }
 

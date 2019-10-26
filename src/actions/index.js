@@ -1,4 +1,10 @@
-import { HANDLE_INPUT_CHANGE, ADD_DATA, SET_INPUT_MESSAGE, DELETE_DATA } from './types'
+import {
+  HANDLE_INPUT_CHANGE,
+  ADD_DATA,
+  SET_INPUT_MESSAGE,
+  DELETE_DATA,
+  SWITCH_INPUT_MODE
+} from './types'
 
 export function handleInputChange(textbox, value) {
   return {
@@ -18,7 +24,7 @@ export function addData() {
 export function deleteData(no) {
   return {
     type: DELETE_DATA,
-    payload:{
+    payload: {
       no
     }
   }
@@ -29,6 +35,15 @@ export function setInputMessage(textbox, bool, message) {
     type: SET_INPUT_MESSAGE,
     payload: {
       textbox, bool, message
+    }
+  }
+}
+
+export function switchInputMode(mode, updateNo) {
+  return {
+    type: SWITCH_INPUT_MODE,
+    payload: {
+      mode, updateNo
     }
   }
 }

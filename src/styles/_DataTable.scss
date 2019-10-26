@@ -1,4 +1,6 @@
 $blockColor: rgb(63, 81, 181);
+$updatingBgColor: rgb(224, 224, 224);
+$updatingTextColor: rgb(100, 100, 100);
 
 @keyframes fadeIn {
   from {
@@ -37,11 +39,17 @@ $blockColor: rgb(63, 81, 181);
     filter: invert(0.5);
   }
 }
+%row-icon--update {
+  cursor: not-allowed;
+  filter: invert(0.5);
+}
 .row {
   width: 100%;
+  padding: 10px;
   display: grid;
   grid-template-columns: 70px 0.3fr 0.3fr 0.4fr 70px 70px;
   grid-template-areas: "no name phone email edit delete";
+  transition: 0.5s;
   &:nth-child(1) {
     grid-area: no;
   }
@@ -67,6 +75,21 @@ $blockColor: rgb(63, 81, 181);
   &__delete-icon {
     @extend %row-icon;
     content: url("../image/delete.svg");
+  }
+  &__check-icon {
+    @extend %row-icon;
+    content: url("../image/check.svg");
+  }
+  &--updating {
+    color: $updatingTextColor;
+    border-radius: 5px;
+    background: $updatingBgColor;
+    .row__edit-icon {
+      @extend %row-icon--update;
+    }
+    .row__delete-icon {
+      @extend %row-icon--update;
+    }
   }
 }
 .no-data {
