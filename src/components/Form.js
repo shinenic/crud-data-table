@@ -72,9 +72,9 @@ class Form extends Component {
             check={this.formatCheck[index]}
             message={this.props.insertInput[key].message}
             isFormatCorrect={this.props.insertInput[key].isFormatCorrect}
-            isEditable={true}
+            editable={true}
             defaultMessage={defaultMessage[index]}
-            addDataOnKeyDown={this.addData} />)
+            actionOnKeyDown={this.addData} />)
         })}
         <div>
           <button onClick={this.addData}>Insert</button>

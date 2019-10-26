@@ -22,7 +22,7 @@ $textColor: rgb(73, 80, 87);
     transition: border 0.3s;
     z-index: 2;
     &--disable {
-      border: none;
+      border-bottom: 1.5px solid transparent;
     }
     &:focus {
       border-bottom: 1.5px solid $textboxFocusColor;

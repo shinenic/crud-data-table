@@ -5,12 +5,10 @@ import FormInput from './FormInput'
 import { checkValueUnique, checkFormat, defaultMessage } from './Form'
 
 class DataRow extends Component {
-  data = this.props.rowValue
-  rowData = [this.data.no, this.data.name, this.data.phone, this.data.email]
   formatCheck = [
     str => {
       const dataExceptSelf = [...this.props.data]
-      dataExceptSelf.splice(dataExceptSelf.map(value => value.no).indexOf(this.data.no), 1)
+      dataExceptSelf.splice(dataExceptSelf.map(value => value.no).indexOf(this.props.rowValue.no), 1)
       return checkValueUnique(str, dataExceptSelf)
     },
     str => checkFormat(str, 'PHONE'),
@@ -33,31 +31,36 @@ class DataRow extends Component {
     if (isFormatPass) {
       this.props.updateData() // update data
       Object.keys(this.props.updateInput).map(key => this.props.handleInputChange('updateInput', key, '')) // clean input
+      return true
     }
+    return false
   }
   render() {
     return (
-      <div className={this.props.isUpdating ? 'row row--updating' : 'row'}>
-        <div>{this.data.no}</div>
+      <div className={this.props.editable ? 'row row--updating' : 'row'}>
+        <div>
+          <div>{this.props.rowValue.no}</div>
+        </div>
         {Object.keys(this.props.updateInput).map((key, index) => {
+          // 順序為 ['name','phone','email']
           return (<FormInput
             key={index}
-            value={this.props.isUpdating ? this.props.updateInput[key].value : this.rowData[index + 1]}
+            value={this.props.editable ? this.props.updateInput[key].value : this.props.rowValue[key]}
             handleChange={str => this.props.handleInputChange('updateInput', key, str)}
             setInputState={(bool, message) => this.props.setInputMessage('updateInput', key, bool, message)}
             check={this.formatCheck[index]}
             message={this.props.updateInput[key].message}
             isFormatCorrect={this.props.updateInput[key].isFormatCorrect}
             defaultMessage={defaultMessage[index]}
-            isEditable={this.props.isUpdating}
-          // updateDataOnKeyDown={this.update} // todo
-          />)
+            editable={this.props.editable}
+            actionOnKeyDown={() => {
+              this.updateDate() && this.props.selectRow({ no: -1 })
+            }} />)
         })}
         <div>
-          {this.props.isUpdating
+          {this.props.editable
             ? <img onClick={() => {
-              this.updateDate()
-              this.props.selectRow({ no: -1 })
+              this.updateDate() && this.props.selectRow({ no: -1 })
             }}
               className="row__check-icon" alt="check-icon" />
             : <img onClick={() => this.props.selectRow(this.props.rowValue)}
@@ -68,7 +71,7 @@ class DataRow extends Component {
           <img
             className="row__delete-icon"
             alt="delete-icon"
-            onClick={() => !this.props.isUpdating && this.props.deleteData(this.props.rowValue.no)}
+            onClick={() => !this.props.editable && this.props.deleteData(this.props.rowValue.no)}
           />
         </div>
       </div>

@@ -1,8 +1,8 @@
 $blockColor: rgb(63, 81, 181);
-$updatingBgColor: rgb(224, 224, 224);
-$updatingTextColor: rgb(100, 100, 100);
+$editableBgColor: rgb(240, 240, 240);
+$editableTextColor: rgb(100, 100, 100);
 
-@keyframes fadeIn {
+@keyframes fadeInFromBottom {
   from {
     opacity: 0;
     top: 8px;
@@ -10,6 +10,14 @@ $updatingTextColor: rgb(100, 100, 100);
   to {
     opacity: 1;
     top: 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -40,8 +48,7 @@ $updatingTextColor: rgb(100, 100, 100);
   }
 }
 %row-icon--update {
-  // cursor: not-allowed;
-  filter: invert(0.5);
+  filter: invert(0.6);
 }
 %grid-center {
   display: grid;
@@ -54,11 +61,18 @@ $updatingTextColor: rgb(100, 100, 100);
   display: grid;
   align-items: center;
   justify-content: center;
+  opacity: 0;
   grid-template-columns: 70px 0.3fr 0.3fr 0.4fr 70px 70px;
   grid-template-areas: "no name phone email edit delete";
-  transition: 0.5s;
+  transition: 0.3s;
+  animation: fadeIn 0.5s both 1;
   &:nth-child(1) {
     grid-area: no;
+    div {
+      position: relative;
+      top:-5px;
+      border:1px solid black;
+    }
   }
   &:nth-child(2) {
     grid-area: name;
@@ -88,18 +102,21 @@ $updatingTextColor: rgb(100, 100, 100);
     content: url("../image/check.svg");
   }
   &--updating {
-    color: $updatingTextColor;
+    // color: $editableTextColor;
     border-radius: 5px;
-    background: $updatingBgColor;
-    .row__edit-icon {
-      @extend %row-icon--update;
+    background: $editableBgColor;
+    & .form-input__textbox {
+      color: black;
     }
+    // .row__edit-icon {
+    //   @extend %row-icon--update;
+    // }
     .row__delete-icon {
       @extend %row-icon--update;
     }
-    .row__check-icon {
-      @extend %row-icon--update;
-    }
+    // .row__check-icon {
+    //   @extend %row-icon--update;
+    // }
   }
 }
 .no-data {
@@ -109,5 +126,5 @@ $updatingTextColor: rgb(100, 100, 100);
   opacity: 0;
   position: relative;
   top: 8px;
-  animation: fadeIn 0.7s both;
+  animation: fadeInFromBottom 0.7s both;
 }

@@ -21,7 +21,7 @@ class DataTable extends Component {
             <DataRow
               key={index}
               rowValue={value}
-              isUpdating={value.no === this.props.selectedData}
+              editable={value.no === this.props.selectedData}
             />
           )
         })}

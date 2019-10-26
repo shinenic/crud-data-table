@@ -59,8 +59,6 @@ const datatableReducer = (state = initState, action) => {
 
     case HANDLE_INPUT_CHANGE:
       let newInput = Object.assign({}, state[action.payload.inputMode])
-      console.log('updateInput:')
-      console.log(state[action.payload.inputMode])
       newInput[action.payload.textbox].value = action.payload.value
       if (action.payload.inputMode === 'updateInput')
         return Object.assign({}, state, { updateInput: newInput })
@@ -82,6 +80,7 @@ const datatableReducer = (state = initState, action) => {
         acc[key] = state.updateInput[key].value
         return acc
       }, {})
+      updateData.no = state.selectedData
       const updateDataIndex = state.data.map(data => data.no).indexOf(state.selectedData)
       const updateDatas = [...state.data]
       updateDatas.splice(updateDataIndex, 1, updateData)
@@ -98,12 +97,13 @@ const datatableReducer = (state = initState, action) => {
       })
 
     case SELECT_ROW:
+      // 設定為不選擇任何 row 更新
       if (action.payload.no === -1)
         return Object.assign({}, state, {
           selectedData: -1
         })
+      // 設定被選中 row 的值到 update input value 之中
       let selectedInput = Object.assign({}, state.updateInput)
-      // 設定被選中 row 的值到 input value state 之中
       Object.keys(selectedInput).map(key => selectedInput[key].value = action.payload[key])
       return Object.assign({}, state, {
         selectedData: action.payload.no,

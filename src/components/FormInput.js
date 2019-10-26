@@ -8,25 +8,23 @@ class FormInput extends Component {
     this.props.setInputState(this.props.check(e.target.value), this.props.defaultMessage)
   }
   handleKeyDown = e => {
-    e.key === 'Enter' && this.props.addDataOnKeyDown()
+    e.key === 'Enter' && this.props.actionOnKeyDown()
   }
   render() {
     return (
       <div className="form-input">
         <input
           type="text"
-          className={!!this.props.isEditable ? "form-input__textbox" : "form-input__textbox form-input__textbox--disable"}
+          className={!!this.props.editable ? "form-input__textbox" : "form-input__textbox form-input__textbox--disable"}
           value={this.props.value}
           onChange={this.handleChange}
           onKeyDown={this.handleKeyDown}
-          disabled={!this.props.isEditable}
-        ></input>
-        {this.props.isEditable ? 'editable' : 'edit disable'}
+          disabled={!this.props.editable} />
         <div
           className={this.props.value === ''
             ? 'form-input__placehoder'
             : 'form-input__placehoder form-input__placehoder--fixed'}>{this.props.name}</div>
-        {this.props.isEditable &&
+        {this.props.editable &&
           <div className={this.props.isFormatCorrect ? "form-input__message" : "form-input__message form-input__message--show"}>{this.props.message}</div>}
       </div>
     )

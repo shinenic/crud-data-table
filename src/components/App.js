@@ -7,10 +7,10 @@ class App extends Component {
     return (
       <div className="app">
         <div className="header">
-          <div className="title">Data Table</div>
-          <div className="search">SEARCH</div>
+          {/* <div className="title">Data Table</div>
+          <div className="search">SEARCH</div> */}
         </div>
-          <Form />
+        <Form />
         <div className="data-table">
           <DataTable />
         </div>
