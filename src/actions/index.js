@@ -1,16 +1,17 @@
 import {
   HANDLE_INPUT_CHANGE,
   ADD_DATA,
+  UPDATE_DATA,
   SET_INPUT_MESSAGE,
   DELETE_DATA,
-  SWITCH_INPUT_MODE
+  SELECT_ROW
 } from './types'
 
-export function handleInputChange(textbox, value) {
+export function handleInputChange(inputMode, textbox, value) {
   return {
     type: HANDLE_INPUT_CHANGE,
     payload: {
-      textbox, value
+      inputMode, textbox, value
     }
   }
 }
@@ -18,6 +19,12 @@ export function handleInputChange(textbox, value) {
 export function addData() {
   return {
     type: ADD_DATA
+  }
+}
+
+export function updateData() {
+  return {
+    type: UPDATE_DATA
   }
 }
 
@@ -30,20 +37,18 @@ export function deleteData(no) {
   }
 }
 
-export function setInputMessage(textbox, bool, message) {
+export function setInputMessage(inputMode, textbox, bool, message) {
   return {
     type: SET_INPUT_MESSAGE,
     payload: {
-      textbox, bool, message
+      inputMode, textbox, bool, message
     }
   }
 }
 
-export function switchInputMode(mode, updateNo) {
+export function selectRow(rowData) {
   return {
-    type: SWITCH_INPUT_MODE,
-    payload: {
-      mode, updateNo
-    }
+    type: SELECT_ROW,
+    payload: rowData
   }
 }

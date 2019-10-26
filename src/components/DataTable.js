@@ -12,8 +12,8 @@ class DataTable extends Component {
           <div>Name</div>
           <div>Phone</div>
           <div>Email</div>
-          <div>Edit</div>
-          <div>Delete</div>
+          <div></div>
+          <div></div>
         </div>
         <div className="block" />
         {this.props.data.map((value, index) => {
@@ -21,7 +21,7 @@ class DataTable extends Component {
             <DataRow
               key={index}
               rowValue={value}
-              isUpdating={value.no === this.props.updatingDataNo}
+              editable={value.no === this.props.selectedData}
             />
           )
         })}
@@ -36,7 +36,7 @@ class DataTable extends Component {
 function mapStateToProps(state) {
   return {
     data: state.root.data,
-    updatingDataNo: state.root.updatingDataNo
+    selectedData: state.root.selectedData
   }
 }
 
