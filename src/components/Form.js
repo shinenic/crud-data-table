@@ -48,6 +48,7 @@ class Form extends Component {
       }
       // 確認是否有空字串
       if (this.props.input[key].value.length === 0) {
+        // 設定錯誤提示
         this.props.setInputMessage(key, false, 'this field is required')
         return false
       }

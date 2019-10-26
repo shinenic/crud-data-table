@@ -1,4 +1,4 @@
-import { HANDLE_INPUT_CHANGE, ADD_DATA, SET_INPUT_MESSAGE } from './types'
+import { HANDLE_INPUT_CHANGE, ADD_DATA, SET_INPUT_MESSAGE, DELETE_DATA } from './types'
 
 export function handleInputChange(textbox, value) {
   return {
@@ -12,6 +12,15 @@ export function handleInputChange(textbox, value) {
 export function addData() {
   return {
     type: ADD_DATA
+  }
+}
+
+export function deleteData(no) {
+  return {
+    type: DELETE_DATA,
+    payload:{
+      no
+    }
   }
 }
 

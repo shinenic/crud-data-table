@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../actions/index'
+import DataRow from './DataRow'
 
 class DataTable extends Component {
   render() {
@@ -17,16 +18,24 @@ class DataTable extends Component {
         <div className="block" />
         {this.props.data.map((value, index) => {
           return (
-            <div className="row" key={index}>
-              <div>{value.no}</div>
-              <div>{value.name}</div>
-              <div>{value.phone}</div>
-              <div>{value.email}</div>
-              <div>O</div>
-              <div>X</div>
-            </div>
+            // <div className="row" key={index}>
+            //   <div>{value.no}</div>
+            //   <div>{value.name}</div>
+            //   <div>{value.phone}</div>
+            //   <div>{value.email}</div>
+            //   <div>O</div>
+            //   <div>X</div>
+            // </div>
+            <DataRow
+              key={index}
+              rowValue={value}
+            />
           )
         })}
+        {this.props.data.length === 0 &&
+          <div className="no-data">
+            <div>No Data Found.</div>
+          </div>}
       </div>
     )
   }

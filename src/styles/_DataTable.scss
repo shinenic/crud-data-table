@@ -1,5 +1,16 @@
 $blockColor: rgb(63, 81, 181);
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    top: 8px;
+  }
+  to {
+    opacity: 1;
+    top: 0;
+  }
+}
+
 .data-table {
   width: 100%;
   height: 100px;
@@ -12,6 +23,18 @@ $blockColor: rgb(63, 81, 181);
     margin: 15px 0;
     border-radius: 5px;
     background: $blockColor;
+  }
+}
+%row-icon {
+  max-width: 20px;
+  max-height: 20px;
+  cursor: pointer;
+  transition: filter 0.3s;
+  &:hover {
+    filter: invert(0.3);
+  }
+  &:active {
+    filter: invert(0.5);
   }
 }
 .row {
@@ -37,4 +60,21 @@ $blockColor: rgb(63, 81, 181);
   &:nth-child(6) {
     grid-area: delete;
   }
+  &__edit-icon {
+    @extend %row-icon;
+    content: url("../image/edit.svg");
+  }
+  &__delete-icon {
+    @extend %row-icon;
+    content: url("../image/delete.svg");
+  }
+}
+.no-data {
+  font-size: 22px;
+  text-align: center;
+  margin-top: 100px;
+  opacity: 0;
+  position: relative;
+  top: 8px;
+  animation: fadeIn 0.7s both;
 }
