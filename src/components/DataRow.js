@@ -37,7 +37,7 @@ class DataRow extends Component {
   }
   render() {
     return (
-      <div className={this.props.editable ? 'row row--updating' : 'row'}>
+      <div className={this.props.editable ? 'row row--updating row--data' : 'row  row--data'}>
         <div>
           <div>{this.props.rowValue.no}</div>
         </div>
