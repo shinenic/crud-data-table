@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "abca878c067df9e07c331d7b811ee237",
+    "revision": "169c526935e86e64f28d2c829d68a88a",
     "url": "/crud-data-table/index.html"
   },
   {
-    "revision": "d65f055e3f4f6b4f93b5",
-    "url": "/crud-data-table/static/css/main.92733aaf.chunk.css"
+    "revision": "770ab0279922ce9dfbbe",
+    "url": "/crud-data-table/static/css/main.36b04bd8.chunk.css"
   },
   {
-    "revision": "4b73dcba335f8273cab7",
-    "url": "/crud-data-table/static/js/2.e6170c3a.chunk.js"
+    "revision": "a4a8c9593050f184c9b6",
+    "url": "/crud-data-table/static/js/2.1b1d573f.chunk.js"
   },
   {
-    "revision": "d65f055e3f4f6b4f93b5",
-    "url": "/crud-data-table/static/js/main.88830e4a.chunk.js"
+    "revision": "770ab0279922ce9dfbbe",
+    "url": "/crud-data-table/static/js/main.9ac84f98.chunk.js"
   },
   {
     "revision": "ac6ad1f36eedb8250d78",
