@@ -1,5 +1,13 @@
 import { combineReducers } from 'redux'
-import { HANDLE_INPUT_CHANGE, ADD_DATA, UPDATE_DATA, SET_INPUT_MESSAGE, DELETE_DATA, SELECT_ROW } from '../actions/types'
+import {
+  HANDLE_INPUT_CHANGE,
+  ADD_DATA,
+  UPDATE_DATA,
+  SET_INPUT_MESSAGE,
+  DELETE_DATA,
+  SELECT_ROW,
+  SORT_DATA
+} from '../actions/types'
 
 const initState = {
   insertInput: {
@@ -11,7 +19,7 @@ const initState = {
     },
     phone: {
       name: 'Phone',
-      value: '0900',
+      value: '0900-465-725',
       message: 'please check the format',
       isFormatCorrect: true
     },
@@ -42,14 +50,42 @@ const initState = {
       isFormatCorrect: true
     }
   },
-  lastestNo:0,
+  lastestNo: 5,
   selectedData: -1,
+  sort: {
+    sortBy: 'no',
+    method: 'decrease'
+  },
   data: [
     {
       name: 'Tim',
-      phone: '09002342',
+      phone: '0981-495-798',
       email: 'fs234@gamil.com',
-      no: 15
+      no: 1
+    },
+    {
+      name: 'Zed',
+      phone: '0000-159-159',
+      email: 'zzz@gamil.com',
+      no: 2
+    },
+    {
+      name: 'Cat',
+      phone: '0956-785-498',
+      email: 'cat@gamil.com',
+      no: 3
+    },
+    {
+      name: 'Annie',
+      phone: '0198-458-498',
+      email: 'ani@hotmail.con.tw',
+      no: 4
+    },
+    {
+      name: 'Gali5566',
+      phone: '0198-498-452',
+      email: 'g5566@gamil.com',
+      no: 5
     }
   ]
 }
@@ -65,18 +101,16 @@ const datatableReducer = (state = initState, action) => {
       else if (action.payload.inputMode === 'insertInput')
         return Object.assign({}, state, { insertInput: newInput })
       else return Object.assign({}, state)
-
     case ADD_DATA:
       const newData = Object.keys(state.insertInput).reduce((acc, key) => {
         acc[key] = state.insertInput[key].value
         return acc
       }, {})
-      newData.no = state.lastestNo+1
+      newData.no = state.lastestNo + 1
       return Object.assign({}, state, {
         data: [...state.data, newData],
-        lastestNo:state.lastestNo+1
+        lastestNo: state.lastestNo + 1
       })
-
     case UPDATE_DATA:
       const updateData = Object.keys(state.updateInput).reduce((acc, key) => {
         acc[key] = state.updateInput[key].value
@@ -89,7 +123,6 @@ const datatableReducer = (state = initState, action) => {
       return Object.assign({}, state, {
         data: [...updateDatas]
       })
-
     case DELETE_DATA:
       // 取得欲刪除 data 之 index
       const index = state.data.map(data => data.no).indexOf(action.payload.no)
@@ -97,7 +130,13 @@ const datatableReducer = (state = initState, action) => {
       return Object.assign({}, state, {
         data: [...state.data]
       })
-
+    case SORT_DATA:
+      return Object.assign({}, state, {
+        sort: {
+          sortBy: action.payload.sortBy,
+          method: action.payload.method
+        }
+      })
     case SELECT_ROW:
       // 設定為不選擇任何 row 更新
       if (action.payload.no === -1)
@@ -111,7 +150,6 @@ const datatableReducer = (state = initState, action) => {
         selectedData: action.payload.no,
         updateInput: selectedInput
       })
-
     case SET_INPUT_MESSAGE:
       let newInputState = Object.assign({}, state[action.payload.inputMode])
       // 若沒有 payload.message 參數傳入
