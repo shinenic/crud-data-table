@@ -1,6 +1,6 @@
 {
-  "name": "rakuten-crud-data-table",
-  "homepage": "http://shinenic.github.io/rakuten-crud-data-table",
+  "name": "crud-data-table",
+  "homepage": "http://shinenic.github.io/crud-data-table",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
