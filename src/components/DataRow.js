@@ -58,27 +58,30 @@ class DataRow extends Component {
             }} />)
         })}
         <div>
-          {this.props.editable
-            ? <img
-              onClick={() => { this.updateDate() && this.props.selectRow({ no: -1 }) }}
-              className="row__check-icon" alt="check-icon" />
-            : <img
-              onClick={() => this.props.selectedData === -1 && this.props.selectRow(this.props.rowValue)}
-              style={this.props.selectedData !== -1 ? { filter: 'invert(0.8)' }:{}} // 禁止同時編輯ㄋ
-              className="row__edit-icon" alt="edit-icon" />
-          }
+          <img
+            onClick={() => { this.updateDate() && this.props.selectRow({ no: -1 }) }}
+            style={!this.props.editable ? { display: 'none' } : null}
+            className="row__check-icon" alt="check-icon" />
+          <img
+            // 禁止同時編輯
+            onClick={() => this.props.selectedData === -1 && this.props.selectRow(this.props.rowValue)}
+            className={this.props.selectedData !== -1 ? "row__edit-icon row--disable" : "row__edit-icon"}
+            style={this.props.editable ? { display: 'none' } : null}
+            alt="edit-icon" />
+
         </div>
         <div>
-          {this.props.editable
-            ? <img
-              className="row__recover-icon"
-              alt="recover-icon"
-              onClick={() => this.props.selectRow({ no: -1 })} />
-            : <img
-              className="row__delete-icon"
-              alt="delete-icon"
-              onClick={() => !this.props.editable && this.props.deleteData(this.props.rowValue.no)} />
-          }
+          <img
+            className="row__recover-icon"
+            alt="recover-icon"
+            style={!this.props.editable ? { display: 'none' } : null}
+            onClick={() => this.props.selectRow({ no: -1 })} />
+          <img
+            className="row__delete-icon"
+            alt="delete-icon"
+            style={this.props.editable ? { display: 'none' } : null}
+            onClick={() => !this.props.editable && this.props.deleteData(this.props.rowValue.no)} />
+
         </div>
       </div>
     )

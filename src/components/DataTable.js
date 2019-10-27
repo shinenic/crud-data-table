@@ -47,13 +47,18 @@ class DataTable extends Component {
             return (
               <div key={index} onClick={() => this.handleSortImg(index)} className="row__sortable-column">
                 {value.name}
-                {
-                  value.sort === 'unset'
-                    ? <img className="row__sort-icon row__sort-icon--unset" alt="sort-icon1" />
-                    : value.sort === 'decrease'
-                      ? <img className="row__sort-icon row__sort-icon--decrease" alt="sort-icon2" />
-                      : <img className="row__sort-icon row__sort-icon--increase" alt="sort-icon3" />
-                }
+                <img
+                  className="row__sort-icon row__sort-icon--unset"
+                  alt="sort-icon1"
+                  style={value.sort !== 'unset' ? { display: 'none' } : {}} />
+                <img
+                  className="row__sort-icon row__sort-icon--decrease"
+                  alt="sort-icon2"
+                  style={value.sort !== 'decrease' ? { display: 'none' } : {}} />
+                <img
+                  className="row__sort-icon row__sort-icon--increase"
+                  alt="sort-icon3"
+                  style={value.sort !== 'increase' ? { display: 'none' } : {}} />
               </div>
             )
           })}
