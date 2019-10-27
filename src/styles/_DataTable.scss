@@ -66,11 +66,11 @@
   @media (max-width: 480px) {
     // grid-template-columns: 50px 0.25fr 0.35fr 0.4fr 30px 20px; 原本的排版
     grid-template-columns: 60px 1fr 40px;
-    grid-template-rows: 50px 50px 50px;
+    grid-template-rows: 25px 25px 25px 25px 25px 25px;
     grid-template-areas:
-      "no name edit"
-      "no phone delete"
-      "no email .";
+      "no name ." "no name edit"
+      "no phone edit" "no phone delete"
+      "no email delete" "no email .";
     border-bottom: 2px solid $block-color;
     &:nth-child(1) {
       grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
