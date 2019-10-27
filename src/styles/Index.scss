@@ -1,9 +1,7 @@
+@import "./ColorConfig";
 @import "./FormInput";
 @import "./Form";
 @import "./DataTable";
-
-$bg-color: rgb(255, 255, 255);
-$text-color: #333;
 
 html,
 body,
@@ -15,7 +13,7 @@ body,
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
-  background: $bg-color;
+  background: $index-bg-color;
   box-sizing: border-box;
   width: 100%;
   -webkit-tap-highlight-color: transparent;
@@ -35,7 +33,7 @@ body,
 .app {
   margin: 10px auto;
   padding: 0 10px;
-  color: $text-color;
+  color: $default-text-color;
   max-width: 900px;
 }
 .header {

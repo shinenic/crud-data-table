@@ -1,7 +1,3 @@
-$blockColor: rgb(63, 81, 181);
-$editableBgColor: rgb(240, 240, 240);
-$editableTextColor: rgb(100, 100, 100);
-
 @keyframes fadeInFromBottom {
   from {
     opacity: 0;
@@ -33,7 +29,7 @@ $editableTextColor: rgb(100, 100, 100);
     width: 100%;
     margin: 15px 0;
     border-radius: 5px;
-    background: $blockColor;
+    background: $block-color;
   }
 }
 %row-icon {
@@ -75,12 +71,17 @@ $editableTextColor: rgb(100, 100, 100);
       "no name edit"
       "no phone delete"
       "no email .";
-    border-bottom: 2px solid $blockColor;
+    border-bottom: 2px solid $block-color;
     &:nth-child(1) {
       grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
       grid-template-rows: 1fr;
       grid-template-areas: "no name phone email";
       border-bottom: none;
+      // fixed table head
+      // position: fixed;
+      // top:0;
+      // background: rgba(255, 255, 255, 0.726);
+      // z-index:10;
     }
   }
   &__sortable-column {
@@ -144,10 +145,13 @@ $editableTextColor: rgb(100, 100, 100);
   }
   &--updating {
     border-radius: 5px;
-    background: $editableBgColor;
+    background: $editable-bg-color;
     & .form-input__textbox {
       color: black;
     }
+  }
+  &--disable {
+    filter: invert(0.8);
   }
 }
 .no-data {
