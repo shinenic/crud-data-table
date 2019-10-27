@@ -19,6 +19,9 @@ describe('reducer', () => {
   })
 
   it('handles actions with type HANDLE_INPUT_CHANGE', () => {
+    const unknownState = Reducer(undefined, { payload: { inputMode: 'error', textbox: 'name', value: 'Jim' } })
+    expect(unknownState.root.insertInput.name.value).toEqual('')
+
     const action = {
       type: HANDLE_INPUT_CHANGE,
       payload: { inputMode: 'insertInput', textbox: 'name', value: 'Jim' }
@@ -83,6 +86,11 @@ describe('reducer', () => {
 
 
     it('handles actions with type SELECT_ROW', () => {
+      const defaultState = Reducer(oneDataState, {
+        type: SELECT_ROW,
+        payload: { no: -1 }
+      })
+      expect(defaultState.root.selectedData).toEqual(-1)
       const action = {
         type: SELECT_ROW,
         payload: Object.assign({}, testData, { no: 1 })
