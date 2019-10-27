@@ -42,12 +42,23 @@ npm install
 npm start
 ```
 
+<img src="public/demo1.gif" alt="demogif" style="display:inline-block" />
+
+<img src="public/demo2.gif" alt="demogif" width="300" style="display:inline-block" />
+
 ### 測試 (詳細結果)
+
 ```
 npm test -- --verbose
 ```
 
+# 設計架構
 
+## 元件架構
 
+<img src="public/DataTable.png" alt="structure" style="display:inline-block" />
 
+## 單元測試
+
+<img src="public/Unit Test.png" alt="structure" style="display:inline-block" />
 
