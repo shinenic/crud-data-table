@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Form from './Form'
 import DataTable from './DataTable'
 import { connect } from 'react-redux'
-import axios from 'axios'
+// import axios from 'axios'
 import * as actions from '../actions/index'
 
 class App extends Component {

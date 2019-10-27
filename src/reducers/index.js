@@ -13,19 +13,19 @@ const initState = {
   insertInput: {
     name: {
       name: 'Name',
-      value: 'Jack',
+      value: '',
       message: 'name has been used',
       isFormatCorrect: true
     },
     phone: {
       name: 'Phone',
-      value: '0900-465-725',
+      value: '',
       message: 'please check the format',
       isFormatCorrect: true
     },
     email: {
       name: 'Email',
-      value: 'fs@yahoo.com',
+      value: '',
       message: 'please check the format',
       isFormatCorrect: true
     }
