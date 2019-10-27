@@ -6,6 +6,7 @@ $buttonActive: rgb(100, 117, 214);
 .form-mobile {
   @media (max-width: 480px) {
     height: 0;
+    padding-left:10px;
     overflow: hidden;
     position: relative;
     top: -4px;

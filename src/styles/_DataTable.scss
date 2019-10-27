@@ -68,9 +68,9 @@ $editableTextColor: rgb(100, 100, 100);
   transition: 0.3s;
   animation: fadeIn 0.5s both 1;
   @media (max-width: 480px) {
-    // grid-template-columns: 50px 0.25fr 0.35fr 0.4fr 30px 20px;
-    grid-template-columns: 70px 1fr 70px;
-    grid-template-rows: 67px 67px 67px;
+    // grid-template-columns: 50px 0.25fr 0.35fr 0.4fr 30px 20px; 原本的排版
+    grid-template-columns: 60px 1fr 40px;
+    grid-template-rows: 50px 50px 50px;
     grid-template-areas:
       "no name edit"
       "no phone delete"

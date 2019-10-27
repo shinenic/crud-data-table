@@ -133,7 +133,11 @@ const datatableReducer = (state = initState, action) => {
         })
       // 設定被選中 row 的值到 update input value 之中
       let selectedInput = Object.assign({}, state.updateInput)
-      Object.keys(selectedInput).map(key => selectedInput[key].value = action.payload[key])
+      Object.keys(selectedInput).map(key => {
+        selectedInput[key].value = action.payload[key]
+        selectedInput[key].isFormatCorrect = true
+        return undefined
+      })
       return Object.assign({}, state, {
         selectedData: action.payload.no,
         updateInput: selectedInput
