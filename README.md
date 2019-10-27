@@ -1,4 +1,4 @@
-# CRUD - TABLE  DATA
+# CRUD - DATA - TABLE
 [Demo]( https://shinenic.github.io/crud-data-table/ )
 
 預設載入固定資料五筆，
