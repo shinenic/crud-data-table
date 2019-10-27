@@ -18,6 +18,7 @@ body,
   background: $bg-color;
   box-sizing: border-box;
   width: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 *,
@@ -71,7 +72,6 @@ body,
       cursor: pointer;
       transform: rotate(0deg);
       transition: background 0.3s, transform 0.5s;
-      -webkit-tap-highlight-color: transparent;
       outline: 0;
 
       &:hover {

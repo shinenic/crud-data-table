@@ -68,7 +68,32 @@ $editableTextColor: rgb(100, 100, 100);
   transition: 0.3s;
   animation: fadeIn 0.5s both 1;
   @media (max-width: 480px) {
-    grid-template-columns: 35px 0.25fr 0.35fr 0.4fr 30px 20px;
+    grid-template-columns: 50px 0.25fr 0.35fr 0.4fr 30px 20px;
+  }
+  &__sortable-column{
+    cursor: pointer;
+  }
+  &__sort-icon {
+    @extend %row-icon;
+    max-width: 16px;
+    max-height: 16px;
+    vertical-align: middle;
+    margin-left: 3px;
+    // filter: invert(0.5);
+    // &--active {
+    //   filter: invert(0);
+    // }
+    &--unset {
+      filter: invert(0.6);
+      content: url("../image/sort.svg");
+    }
+    &--decrease {
+      content: url("../image/sorted.svg");
+    }
+    &--increase {
+      transform: rotate(180deg);
+      content: url("../image/sorted.svg");
+    }
   }
   & > div:nth-child(1) {
     grid-area: no;
@@ -114,9 +139,6 @@ $editableTextColor: rgb(100, 100, 100);
     & .form-input__textbox {
       color: black;
     }
-    // .row__delete-icon {
-    //   @extend %row-icon--editable;
-    // }
   }
 }
 .no-data {
