@@ -59,11 +59,12 @@ class DataRow extends Component {
         })}
         <div>
           {this.props.editable
-            ? <img onClick={() => {
-              this.updateDate() && this.props.selectRow({ no: -1 })
-            }}
+            ? <img
+              onClick={() => { this.updateDate() && this.props.selectRow({ no: -1 }) }}
               className="row__check-icon" alt="check-icon" />
-            : <img onClick={() => this.props.selectRow(this.props.rowValue)}
+            : <img
+              onClick={() => this.props.selectedData === -1 && this.props.selectRow(this.props.rowValue)}
+              style={this.props.selectedData !== -1 ? { filter: 'invert(0.8)' }:{}}
               className="row__edit-icon" alt="edit-icon" />
           }
         </div>
@@ -86,7 +87,8 @@ class DataRow extends Component {
 function mapStateToProps(state) {
   return {
     updateInput: state.root.updateInput,
-    data: state.root.data
+    data: state.root.data,
+    selectedData: state.root.selectedData
   }
 }
 
