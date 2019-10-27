@@ -68,9 +68,22 @@ $editableTextColor: rgb(100, 100, 100);
   transition: 0.3s;
   animation: fadeIn 0.5s both 1;
   @media (max-width: 480px) {
-    grid-template-columns: 50px 0.25fr 0.35fr 0.4fr 30px 20px;
+    // grid-template-columns: 50px 0.25fr 0.35fr 0.4fr 30px 20px;
+    grid-template-columns: 70px 1fr 70px;
+    grid-template-rows: 67px 67px 67px;
+    grid-template-areas:
+      "no name edit"
+      "no phone delete"
+      "no email .";
+    border-bottom: 2px solid $blockColor;
+    &:nth-child(1) {
+      grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+      grid-template-rows: 1fr;
+      grid-template-areas: "no name phone email";
+      border-bottom: none;
+    }
   }
-  &__sortable-column{
+  &__sortable-column {
     cursor: pointer;
   }
   &__sort-icon {
@@ -128,6 +141,9 @@ $editableTextColor: rgb(100, 100, 100);
   &__recover-icon {
     @extend %row-icon;
     content: url("../image/recover.svg");
+  }
+  &--icon-disable {
+    filter: invert(0.5);
   }
   &--updating {
     border-radius: 5px;
