@@ -64,7 +64,7 @@ class DataRow extends Component {
               className="row__check-icon" alt="check-icon" />
             : <img
               onClick={() => this.props.selectedData === -1 && this.props.selectRow(this.props.rowValue)}
-              style={this.props.selectedData !== -1 ? { filter: 'invert(0.8)' }:{}}
+              style={this.props.selectedData !== -1 ? { filter: 'invert(0.8)' }:{}} // 禁止同時編輯ㄋ
               className="row__edit-icon" alt="edit-icon" />
           }
         </div>

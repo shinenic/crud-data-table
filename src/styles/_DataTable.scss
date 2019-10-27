@@ -142,9 +142,6 @@ $editableTextColor: rgb(100, 100, 100);
     @extend %row-icon;
     content: url("../image/recover.svg");
   }
-  &--icon-disable {
-    filter: invert(0.5);
-  }
   &--updating {
     border-radius: 5px;
     background: $editableBgColor;
