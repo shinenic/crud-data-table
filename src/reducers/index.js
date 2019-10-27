@@ -49,40 +49,9 @@ const initState = {
       isFormatCorrect: true
     }
   },
-  lastestNo: 5,
   selectedData: -1,
-  data: [
-    {
-      name: 'Tim',
-      phone: '0981-495-798',
-      email: 'fs234@gamil.com',
-      no: 1
-    },
-    {
-      name: 'Zed',
-      phone: '0000-159-159',
-      email: 'zzz@gamil.com',
-      no: 2
-    },
-    {
-      name: 'Cat',
-      phone: '0956-785-498',
-      email: 'cat@gamil.com',
-      no: 3
-    },
-    {
-      name: 'Annie',
-      phone: '0198-458-498',
-      email: 'ani@hotmail.con.tw',
-      no: 4
-    },
-    {
-      name: 'Gali5566',
-      phone: '0198-498-452',
-      email: 'g5566@gamil.com',
-      no: 5
-    }
-  ]
+  lastestNo: 0,
+  data: []
 }
 
 const datatableReducer = (state = initState, action) => {
@@ -97,8 +66,8 @@ const datatableReducer = (state = initState, action) => {
         return Object.assign({}, state, { insertInput: newInput })
       else return Object.assign({}, state)
     case ADD_DATA:
-      const newData = Object.keys(state.insertInput).reduce((acc, key) => {
-        acc[key] = state.insertInput[key].value
+      const newData = Object.keys(action.payload).reduce((acc, key) => {
+        acc[key] = action.payload[key]
         return acc
       }, {})
       newData.no = state.lastestNo + 1

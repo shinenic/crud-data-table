@@ -55,7 +55,12 @@ class Form extends Component {
       return acc
     }, true)
     if (isFormatPass) {
-      this.props.addData() // add data
+      const data = Object.keys(this.props.insertInput)
+        .reduce((acc, key) => {
+          acc[key] = this.props.insertInput[key].value
+          return acc
+        }, {})
+      this.props.addData(data) // add data
       Object.keys(this.props.insertInput).map(key => this.props.handleInputChange('insertInput', key, '')) // clean input
     }
   }

@@ -1,10 +1,41 @@
 import React, { Component } from 'react'
 import Form from './Form'
 import DataTable from './DataTable'
+import { connect } from 'react-redux'
+import * as actions from '../actions/index'
 
 class App extends Component {
   state = {
     formExpand: undefined
+  }
+  componentDidMount() {
+    const demoData = [
+      {
+        name: 'Tim',
+        phone: '0981-495-798',
+        email: 'fs234@gamil.com'
+      },
+      {
+        name: 'Zed',
+        phone: '0000-159-159',
+        email: 'zzz@gamil.com'
+      },
+      {
+        name: 'Cat',
+        phone: '0956-785-498',
+        email: 'cat@gamil.com'
+      },
+      {
+        name: 'Annie',
+        phone: '0198-458-498',
+        email: 'ani@hotmail.con.tw'
+      },
+      {
+        name: 'Gali5566',
+        phone: '0198-498-452',
+        email: 'g5566@gamil.com'
+      }]
+    demoData.map(data => this.props.addData(data))
   }
   formToggle = () => {
     const toggleButton = document.querySelector('.insert-toggle__button')
@@ -32,7 +63,7 @@ class App extends Component {
               onClick={this.formToggle}>+</div>
           </div>
         </div>
-        <Form/>
+        <Form />
         <div className="data-table">
           <DataTable />
         </div>
@@ -41,4 +72,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default connect(null, actions)(App)

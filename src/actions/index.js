@@ -16,9 +16,10 @@ export function handleInputChange(inputMode, textbox, value) {
   }
 }
 
-export function addData() {
+export function addData(data) {
   return {
-    type: ADD_DATA
+    type: ADD_DATA,
+    payload:data
   }
 }
 
