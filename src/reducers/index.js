@@ -5,7 +5,8 @@ import {
   UPDATE_DATA,
   SET_INPUT_MESSAGE,
   DELETE_DATA,
-  SELECT_ROW
+  SELECT_ROW,
+  SET_IS_FETCHING
 } from '../actions/types'
 
 const initState = {
@@ -51,7 +52,8 @@ const initState = {
   },
   selectedData: -1,
   lastestNo: 0,
-  data: []
+  data: [],
+  isFetching: false
 }
 
 const datatableReducer = (state = initState, action) => {
@@ -123,7 +125,10 @@ const datatableReducer = (state = initState, action) => {
         return Object.assign({}, state, { insertInput: newInputState })
       else
         return Object.assign({}, state)
-
+    case SET_IS_FETCHING:
+      return Object.assign({}, state, {
+        isFetching: action.payload
+      })
     default:
       return state
   }

@@ -4,7 +4,8 @@ import {
   UPDATE_DATA,
   SET_INPUT_MESSAGE,
   DELETE_DATA,
-  SELECT_ROW
+  SELECT_ROW,
+  SET_IS_FETCHING
 } from './types'
 
 export function handleInputChange(inputMode, textbox, value) {
@@ -19,7 +20,7 @@ export function handleInputChange(inputMode, textbox, value) {
 export function addData(data) {
   return {
     type: ADD_DATA,
-    payload:data
+    payload: data
   }
 }
 
@@ -51,5 +52,12 @@ export function selectRow(rowData) {
   return {
     type: SELECT_ROW,
     payload: rowData
+  }
+}
+
+export function setIsFetching(bool) {
+  return {
+    type: SET_IS_FETCHING,
+    payload: bool
   }
 }

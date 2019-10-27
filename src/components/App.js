@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import Form from './Form'
 import DataTable from './DataTable'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import * as actions from '../actions/index'
 
 class App extends Component {
   state = {
     formExpand: undefined
   }
-  componentDidMount() {
-    const demoData = [
+  async componentDidMount() {
+    // load static demo data
+    let demoData = [
       {
         name: 'Tim',
         phone: '0981-495-798',
@@ -36,6 +38,20 @@ class App extends Component {
         email: 'g5566@gamil.com'
       }]
     demoData.map(data => this.props.addData(data))
+
+    // load random user data
+    // this.props.setIsFetching(true)
+    // for (let i = 0; i < 5; i++) {
+    //   await axios.get('https://randomuser.me/api/')
+    //     .then(res => {
+    //       this.props.addData({
+    //         name: res.data.results[0].name.first,
+    //         phone: res.data.results[0].cell.replace(/[^0-9+-]/g, ''),
+    //         email: res.data.results[0].email
+    //       })
+    //     })
+    // }
+    // this.props.setIsFetching(false)
   }
   formToggle = () => {
     const toggleButton = document.querySelector('.insert-toggle__button')

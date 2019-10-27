@@ -59,13 +59,18 @@
   align-items: center;
   justify-content: center;
   opacity: 0;
-  grid-template-columns: 70px 0.3fr 0.3fr 0.4fr 70px 70px;
+  grid-template-columns: 70px 0.25fr 0.25fr 0.5fr 70px 70px;
   grid-template-areas: "no name phone email edit delete";
   transition: 0.3s;
   animation: fadeIn 0.5s both 1;
+  &:nth-child(1) {
+    // table head 不設定動畫
+    animation: unset;
+    opacity: 1;
+  }
   @media (max-width: 480px) {
     // grid-template-columns: 50px 0.25fr 0.35fr 0.4fr 30px 20px; 原本的排版
-    grid-template-columns: 60px 1fr 40px;
+    grid-template-columns: 30px 1fr 40px;
     grid-template-rows: 25px 25px 25px 25px 25px 25px;
     grid-template-areas:
       "no name ." "no name edit"
@@ -154,7 +159,7 @@
     filter: invert(0.8);
   }
 }
-.no-data {
+.data-table-hint {
   font-size: 22px;
   text-align: center;
   margin-top: 100px;

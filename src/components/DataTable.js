@@ -83,8 +83,8 @@ class DataTable extends Component {
             />
           )
         })}
-        {this.props.data.length === 0 &&
-          <div className="no-data">
+        {this.props.data.length === 0 && !this.props.isFetching &&
+          <div className="data-table-hint">
             <div>No Data Found.</div>
           </div>}
       </div>
@@ -95,6 +95,7 @@ function mapStateToProps(state) {
   return {
     data: state.root.data,
     selectedData: state.root.selectedData,
+    isFetching: state.root.isFetching
   }
 }
 
