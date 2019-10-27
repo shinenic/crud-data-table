@@ -4,8 +4,7 @@ import {
   UPDATE_DATA,
   SET_INPUT_MESSAGE,
   DELETE_DATA,
-  SELECT_ROW,
-  SORT_DATA
+  SELECT_ROW
 } from './types'
 
 export function handleInputChange(inputMode, textbox, value) {
@@ -34,15 +33,6 @@ export function deleteData(no) {
     type: DELETE_DATA,
     payload: {
       no
-    }
-  }
-}
-
-export function sortData(sortBy, method) {
-  return {
-    type: SORT_DATA,
-    payload: {
-      sortBy, method
     }
   }
 }

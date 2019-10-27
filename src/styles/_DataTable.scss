@@ -51,8 +51,8 @@ $editableTextColor: rgb(100, 100, 100);
 %row-icon--editable {
   filter: invert(0.6);
 }
-%grid-center {
-  display: grid;
+%flex-center {
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -75,16 +75,12 @@ $editableTextColor: rgb(100, 100, 100);
   }
   &__sort-icon {
     @extend %row-icon;
-    max-width: 16px;
-    max-height: 16px;
+    max-width: 20px;
+    max-height: 20px;
     vertical-align: middle;
-    margin-left: 3px;
-    // filter: invert(0.5);
-    // &--active {
-    //   filter: invert(0);
-    // }
+    margin-left: 1.5px;
     &--unset {
-      filter: invert(0.6);
+      filter: invert(0.8);
       content: url("../image/sort.svg");
     }
     &--decrease {

@@ -5,8 +5,7 @@ import {
   UPDATE_DATA,
   SET_INPUT_MESSAGE,
   DELETE_DATA,
-  SELECT_ROW,
-  SORT_DATA
+  SELECT_ROW
 } from '../actions/types'
 
 const initState = {
@@ -52,10 +51,6 @@ const initState = {
   },
   lastestNo: 5,
   selectedData: -1,
-  sort: {
-    sortBy: 'no',
-    method: 'decrease'
-  },
   data: [
     {
       name: 'Tim',
@@ -129,13 +124,6 @@ const datatableReducer = (state = initState, action) => {
       state.data.splice(index, 1)
       return Object.assign({}, state, {
         data: [...state.data]
-      })
-    case SORT_DATA:
-      return Object.assign({}, state, {
-        sort: {
-          sortBy: action.payload.sortBy,
-          method: action.payload.method
-        }
       })
     case SELECT_ROW:
       // 設定為不選擇任何 row 更新

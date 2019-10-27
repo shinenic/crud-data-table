@@ -9,8 +9,20 @@ class DataTable extends Component {
       { name: 'No', sort: 'unset' },
       { name: 'Name', sort: 'unset' },
       { name: 'Phone', sort: 'unset' },
-      { name: 'Email', sort: 'unset' }]
+      { name: 'Email', sort: 'unset' }],
+    sort: {
+      sortBy: 'no',
+      method: 'decrease'
+    },
     // increase, decrease
+  }
+  sortData = (sortBy, method) => {
+    this.setState({
+      sort: {
+        sortBy: sortBy,
+        method: method
+      }
+    })
   }
   handleSortImg = (id) => {
     let sortState = this.state.tableHead.map(value => value.sort)
@@ -25,7 +37,7 @@ class DataTable extends Component {
       newState.tableHead[id].sort = 'decrease'
     }
     this.setState({ tableHead: newState.tableHead })
-    this.props.sortData(this.state.tableHead[id].name.toLowerCase(), this.state.tableHead[id].sort)
+    this.sortData(this.state.tableHead[id].name.toLowerCase(), this.state.tableHead[id].sort)
   }
   render() {
     return (
@@ -50,17 +62,17 @@ class DataTable extends Component {
           <div></div>
         </div>
         <div className="block" />
+        {/* 排序功能 */}
         {this.props.data.sort((a, b) => {
-          if (this.props.sort.method === 'unset') {
+          if (this.state.sort.method === 'unset') {
             return a.no - b.no;
-          } else if (this.props.sort.sortBy === 'no') {
-            return this.props.sort.method === 'decrease' ? a.no - b.no : b.no - a.no
+          } else if (this.state.sort.sortBy === 'no') {
+            return this.state.sort.method === 'decrease' ? a.no - b.no : b.no - a.no
           } else {
-            console.log(this.props.sort.sortBy)
-            if (this.props.sort.method === 'decrease')
-              return a[this.props.sort.sortBy] > b[this.props.sort.sortBy] ? 1 : -1
+            if (this.state.sort.method === 'decrease')
+              return a[this.state.sort.sortBy] > b[this.state.sort.sortBy] ? 1 : -1
             else
-              return b[this.props.sort.sortBy] > a[this.props.sort.sortBy] ? 1 : -1
+              return b[this.state.sort.sortBy] > a[this.state.sort.sortBy] ? 1 : -1
           }
         }).map((value, index) => {
           return (
@@ -83,7 +95,6 @@ function mapStateToProps(state) {
   return {
     data: state.root.data,
     selectedData: state.root.selectedData,
-    sort: state.root.sort,
   }
 }
 
