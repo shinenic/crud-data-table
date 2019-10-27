@@ -1,19 +1,41 @@
 $buttonColor: rgb(63, 81, 181);
 $textColor: rgb(73, 80, 87);
 $buttonHover: rgb(80, 97, 194);
-$buttonActive: rgb(100,117,214);
+$buttonActive: rgb(100, 117, 214);
 
+.form-mobile {
+  @media (max-width: 480px) {
+    height: 0;
+    overflow: hidden;
+    position: relative;
+    top: -4px;
+    opacity: 0;
+    transition: opacity 0.3s, top 0.5s, height 0.4s 0.1s;
+    &--expand {
+      transition: opacity 0.3s 0.2s, top 0.3s 0.2s, height 0.5s;
+      top: 0;
+      height: 280px;
+      opacity: 1;
+    }
+  }
+}
 .form {
   width: 100%;
   grid-area: form;
   display: flex;
   align-items: center;
   justify-content: center;
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
   & div {
     flex: 1;
+    @media (max-width: 480px) {
+      flex: unset;
+      width: 100%;
+    }
   }
   & > div > button {
-    background: transparent;
     padding: 7px 18px;
     border: none;
     background: $buttonColor;

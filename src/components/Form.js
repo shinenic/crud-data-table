@@ -61,7 +61,7 @@ class Form extends Component {
   }
   render() {
     return (
-      <div className="form">
+      <div className="form form-mobile">
         {Object.keys(this.props.insertInput).map((key, index) => {
           return (<FormInput
             key={index}
