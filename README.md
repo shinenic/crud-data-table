@@ -47,26 +47,7 @@ npm start
 npm test -- --verbose
 ```
 
-### 測試 (覆蓋率)
-
-```
-npm test -- --coverage
-```
 
 
 
-# 測試結果
-
-## `npm start` 執行畫面
-<img src="demo/demo.gif" alt="demogif" width="300" style="display:inline-block" />
-
-## `npm test` 測試輸出
-<img src="demo/test.png" alt="test" width="550" style="display:inline-block" />
-
-## `npm test -- --verbose` 詳細單元測試清單
-<img src="demo/test-verbose-01.png" alt="test" width="800" style="display:inline-block" />
-<img src="demo/test-verbose-02.png" alt="test" width="800" style="display:inline-block" />
-
-## `npm test -- --coverage` 測試覆蓋率
-<img src="demo/test-coverage.png" alt="test" width="800" style="display:inline-block" />
 

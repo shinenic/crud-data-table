@@ -1,40 +1,127 @@
-import todoReducer from '../todos'
-import { ADD_TODO, REMOVE_TODO, TOGGLE_TODO } from '../../actions/types'
+import Reducer from '../index'
+import {
+  HANDLE_INPUT_CHANGE,
+  ADD_DATA,
+  UPDATE_DATA,
+  SET_INPUT_MESSAGE,
+  DELETE_DATA,
+  SELECT_ROW,
+  SET_IS_FETCHING
+} from '../../actions/types'
+
+const testData = { name: 'Jack', phone: '0654-498-755', email: 'ace@yees.com' }
 
 describe('reducer', () => {
   it('handles actions with unknown type', () => {
-    const newState = todoReducer({}, {})
-    expect(newState).toEqual({})
+    const newState = Reducer({}, {})
+    const unknownType = Reducer({}, { action: undefined })
+    expect(newState).toEqual(unknownType)
   })
 
-  it('handles actions with type ADD_TODO', () => {
-    const action = { type: ADD_TODO, payload: 'test todo' }
-    const newState = todoReducer(undefined, action)
-    expect(newState.todoList).toEqual([{ content: 'test todo', id: 0, completed: false }])
-  })
+  it('handles actions with type HANDLE_INPUT_CHANGE', () => {
+    const unknownState = Reducer(undefined, { payload: { inputMode: 'error', textbox: 'name', value: 'Jim' } })
+    expect(unknownState.root.insertInput.name.value).toEqual('')
 
-  it('handles actions with type REMOVE_TODO', () => {
-    const initState = {
-      currentId: 1,
-      todoList: [{ content: 'test todo', id: 0, completed: false }]
+    const action = {
+      type: HANDLE_INPUT_CHANGE,
+      payload: { inputMode: 'insertInput', textbox: 'name', value: 'Jim' }
     }
-    const action = { type: REMOVE_TODO, payload: 0 }
-    const newState = todoReducer(initState, action)
-    expect(newState.todoList).toEqual([])
+    const newState = Reducer(undefined, action)
+    expect(newState.root.insertInput.name.value).toEqual('Jim')
   })
 
-  it('handles actions with type TOGGLE_TODO', () => {
-    const initState = {
-      currentId: 1,
-      todoList: [{ content: 'test todo', id: 0, completed: false }]
+  it('handles actions with type ADD_DATA', () => {
+    const action = {
+      type: ADD_DATA,
+      payload: testData
     }
-    const actionTrue = { type: TOGGLE_TODO, payload: { id: 0, bool: true } }
-    const actionFalse = { type: TOGGLE_TODO, payload: { id: 0, bool: false } }
-    let newState = todoReducer(initState, actionTrue)
+    const newState = Reducer(undefined, action)
+    const testDataWithNo = Object.assign({}, testData)
+    testDataWithNo.no = 1
+    expect(newState.root.data.length).toEqual(1)
+    expect(newState.root.data[0]).toEqual(testDataWithNo)
+  })
 
-    expect(newState.todoList[0].completed).toEqual(true)
+  it('handles actions with type SET_IS_FETCHING', () => {
+    const action = {
+      type: SET_IS_FETCHING,
+      payload: true
+    }
+    const newState = Reducer(undefined, action)
+    expect(newState.root.isFetching).toEqual(true)
+  })
 
-    newState = todoReducer(initState, actionFalse)
-    expect(newState.todoList[0].completed).toEqual(false)
+  it('handles actions with type SET_INPUT_MESSAGE', () => {
+    const payload = {
+      inputMode: 'insertInput', textbox: 'phone', bool: true, message: 'test'
+    }
+    const action = {
+      type: SET_INPUT_MESSAGE,
+      payload
+    }
+    const newState = Reducer(undefined, action)
+    expect(newState.root.insertInput.phone.isFormatCorrect).toEqual(true)
+    expect(newState.root.insertInput.phone.message).toEqual(payload.message)
+  })
+
+  describe('with one data', () => {
+    let oneDataState
+    beforeEach(() => {
+      const action = {
+        type: ADD_DATA,
+        payload: testData
+      }
+      oneDataState = Reducer(undefined, action)
+    })
+    afterEach(() => { oneDataState = {} })
+
+    it('handles actions with type DELETE_DATA', () => {
+      const action = {
+        type: DELETE_DATA,
+        payload: { no: 1 }
+      }
+      const deletedState = Reducer(oneDataState, action)
+      expect(deletedState.root.data.length).toEqual(0)
+    })
+
+
+    it('handles actions with type SELECT_ROW', () => {
+      const defaultState = Reducer(oneDataState, {
+        type: SELECT_ROW,
+        payload: { no: -1 }
+      })
+      expect(defaultState.root.selectedData).toEqual(-1)
+      const action = {
+        type: SELECT_ROW,
+        payload: Object.assign({}, testData, { no: 1 })
+      }
+      const newState = Reducer(oneDataState, action)
+      expect(newState.root.selectedData).toEqual(1)
+      expect(newState.root.updateInput.name.value).toEqual(testData.name)
+      expect(newState.root.updateInput.phone.value).toEqual(testData.phone)
+      expect(newState.root.updateInput.email.value).toEqual(testData.email)
+    })
+
+    it('handles actions with type UPDATE_DATA', () => {
+      // 先選擇 row
+      const selectRowAction = {
+        type: SELECT_ROW,
+        payload: Object.assign({}, testData, { no: 1 })
+      }
+      const selectedRowState = Reducer(oneDataState, selectRowAction)
+      // 更新 updateInput value
+      const updateValueAction = {
+        type: HANDLE_INPUT_CHANGE,
+        payload: { inputMode: 'updateInput', textbox: 'phone', value: '0123' }
+      }
+      const updatedRowState = Reducer(selectedRowState, updateValueAction)
+
+      const action = {
+        type: UPDATE_DATA
+      }
+      const newState = Reducer(updatedRowState, action)
+      expect(newState.root.data.length).toEqual(1)
+      expect(newState.root.data[0]).toEqual(Object.assign({}, testData, { no: 1, phone: '0123' }))
+    })
   })
 })

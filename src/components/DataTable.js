@@ -13,8 +13,7 @@ class DataTable extends Component {
     sort: {
       sortBy: 'no',
       method: 'decrease'
-    },
-    // increase, decrease
+    } // increase, decrease
   }
   sortData = (sortBy, method) => {
     this.setState({
