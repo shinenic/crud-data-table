@@ -76,7 +76,7 @@ class App extends Component {
           </div>
           <div className="insert-toggle">
             <div className="insert-toggle__button"
-              onClick={this.formToggle}>+</div>
+              onClick={this.formToggle}/>
           </div>
         </div>
         <Form />

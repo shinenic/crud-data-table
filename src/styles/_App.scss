@@ -1,4 +1,3 @@
-
 %grid-start {
   display: grid;
   align-items: center;
@@ -29,7 +28,7 @@
     width: 100%;
     @extend %grid-start;
     justify-content: end;
-    padding-right:20px;
+    padding-right: 20px;
     @media (max-width: 480px) {
       display: grid;
     }
@@ -47,6 +46,9 @@
       transform: rotate(0deg);
       transition: background 0.3s, transform 0.5s;
       outline: 0;
+      &::before {
+        content: "+";
+      }
 
       &:hover {
         background: rgb(63, 81, 181);
