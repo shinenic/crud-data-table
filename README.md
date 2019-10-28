@@ -58,7 +58,7 @@ npm test -- --verbose
 
 <img src="public/DataTable.png" alt="structure" style="display:inline-block" />
 
-## 單元測試
-
+## 單元測試 
+(目前僅實現部分)
 <img src="public/Unit Test.png" alt="structure" style="display:inline-block" />
 
